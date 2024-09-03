@@ -2,14 +2,12 @@ import { NextResponse } from "next/server";
 
 import { PrismaClient } from "@prisma/client";
 import * as jwt from "@/utils/jwt";
-
 import * as passwords from "@/utils/password";
 
 const prisma = new PrismaClient();
 
-export const POST = async (req, options) => {
-  const { email, password, name } = await req.json();
-  console.log(email, password, name);
+export async function POST(req, options) {
+  const { email, password } = await req.json();
 
   if (!email || !password) {
     return NextResponse.json(
@@ -18,18 +16,30 @@ export const POST = async (req, options) => {
     );
   }
 
-  //TODO hash password
-  const hasshedPassword = await passwords.hashPassword(password);
-  console.log(hasshedPassword);
-  // -_-
-
-  const user = await prisma.user.create({
-    data: {
+  const user = await prisma.user.findUnique({
+    where: {
       email,
-      password: hasshedPassword,
-      name,
     },
   });
+
+  if (!user) {
+    return NextResponse.json(
+      { error: "Crendetials not correct" },
+      { status: 401 }
+    );
+  }
+
+  const isPasswordCorrect = await passwords.comparePassword(
+    password,
+    user.password
+  );
+
+  if (!isPasswordCorrect) {
+    return NextResponse.json(
+      { error: "Crendetials not correct" },
+      { status: 401 }
+    );
+  }
 
   const token = await jwt.signJWT({ userId: user.id, email: user.email });
 
@@ -37,4 +47,4 @@ export const POST = async (req, options) => {
     token,
     user,
   });
-};
+}
