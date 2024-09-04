@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
-import React, { createContext, useState, useEffect } from "react";
-import LocalStorageKit from "@/utils/localStorageKit";
+import React, { createContext, useState, useEffect } from 'react';
+import LocalStorageKit from '@/utils/localStorageKit';
 
 const defaultValue = {
   user: {
-    id: "",
-    email: "",
-    name: "",
-    createdAt: "",
-    updatedAt: "",
+    id: '',
+    email: '',
+    name: '',
+    createdAt: '',
+    updatedAt: '',
   },
-  token: "",
+  token: '',
   isLoggedIn: false,
 
   actions: {
@@ -43,24 +43,30 @@ const AuthProvider = ({ children }) => {
   }, [token]);
 
   const _getUser = async () => {
-    const res = await fetch("http://localhost:3000/api/auth/me", {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token,
-      },
-    });
-    if (!res.ok) {
-      throw new Error("Failed to get user");
+    try {
+      const res = await fetch('http://localhost:3000/api/auth/me', {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + token,
+        },
+      });
+
+      if (!res.ok) {
+        throw new Error('Failed to get user');
+      }
+
+      const data = await res.json();
+      setUser(data);
+    } catch (error) {
+      console.error('Error fetching user:', error);
     }
-    const data = await res.json();
-    setUser(data);
   };
 
   const login = async (email, password) => {
-    const res = await fetch("http://localhost:3000/api/auth/login", {
-      method: "POST",
+    const res = await fetch('http://localhost:3000/api/auth/login', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         email,
@@ -68,9 +74,10 @@ const AuthProvider = ({ children }) => {
       }),
     });
     if (!res.ok) {
-      throw new Error("Failed to login");
+      throw new Error('Failed to login');
     }
     const data = await res.json();
+
     setToken(data.token);
     setUser(data.user);
     LocalStorageKit.setToken(data.token);
@@ -78,10 +85,10 @@ const AuthProvider = ({ children }) => {
   };
 
   const register = async (email, password, name) => {
-    const res = await fetch("http://localhost:3000/api/auth/register", {
-      method: "POST",
+    const res = await fetch('http://localhost:3000/api/auth/register', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         email,
@@ -90,7 +97,7 @@ const AuthProvider = ({ children }) => {
       }),
     });
     if (!res.ok) {
-      throw new Error("Failed to register");
+      throw new Error('Failed to register');
     }
     const data = await res.json();
     setToken(data.token);
