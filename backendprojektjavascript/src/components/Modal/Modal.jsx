@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import style from '../Item/item.module.css';
-import { useAuth } from '@/contexts/auth';
+// -_-
+import React, { useState } from "react";
+import style from "../Item/item.module.css";
+import { useAuth } from "@/contexts/auth";
 
 const Modal = ({ setEdit, item, onItemChange }) => {
   const auth = useAuth();
@@ -15,7 +16,7 @@ const Modal = ({ setEdit, item, onItemChange }) => {
     setEdit(false);
   };
   const handleSave = async (e) => {
-    console.log('Trying to save some new stuffs');
+    // console.log("Trying to save some new stuffs");
     // TRY AND CATCH FROM THE API/ITEM/ID
     e.preventDefault();
     const id = e.target.id;
@@ -30,44 +31,46 @@ const Modal = ({ setEdit, item, onItemChange }) => {
 
     try {
       const res = await fetch(`/api/items/${id}`, {
-        method: 'PUT',
+        method: "PUT",
         headers: {
-          'Content-type': 'application/json',
+          "Content-type": "application/json",
           Authorization: `Bearer ${auth.token}`,
         },
         body: JSON.stringify(updatedItem),
       });
 
       if (!res.ok) {
-        throw new Error('Failed to update item');
+        throw new Error("Failed to update item");
       }
       if (onItemChange) {
         onItemChange();
       }
     } catch (error) {
-      console.log('Error: ', error);
+      console.log("Error: ", error);
     }
     setEdit(false);
   };
+
+  // -_-
   return (
     <>
       <div className={style.listItems}>
         <div className={style.top}>
           <input
-            type='text'
+            type="text"
             defaultValue={item.name}
             className={style.listItem}
             onChange={(e) => setNewName(e.target.value)}
           />
 
           <input
-            type='text'
+            type="text"
             defaultValue={item.category}
             className={style.listItem}
             onChange={(e) => setCategory(e.target.value)}
           />
           <input
-            type='number'
+            type="number"
             defaultValue={item.quantity}
             className={style.listItem}
             onChange={(e) => setQuantity(e.target.value)}
@@ -77,8 +80,8 @@ const Modal = ({ setEdit, item, onItemChange }) => {
         <div className={style.bot}>
           <textarea
             className={`${style.desc} ${style.listItem}`}
-            name='description'
-            id='desc'
+            name="description"
+            id="desc"
             defaultValue={item.description}
             onChange={(e) => setDescription(e.target.value)}
           ></textarea>

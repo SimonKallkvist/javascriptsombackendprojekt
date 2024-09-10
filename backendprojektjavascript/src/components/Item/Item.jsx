@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import styles from './item.module.css';
-import { useAuth } from '@/contexts/auth';
-import Modal from '../Modal/Modal';
+// -_-
+import React, { useState } from "react";
+import styles from "./item.module.css";
+import { useAuth } from "@/contexts/auth";
+import Modal from "../Modal/Modal";
 
 const Item = ({
   name,
@@ -30,20 +31,20 @@ const Item = ({
 
     try {
       const res = await fetch(`/api/items/${id}`, {
-        method: 'DELETE',
+        method: "DELETE",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Authorization: `Bearer ${auth.token}`,
         },
       });
       if (!res.ok) {
-        throw new Error('Failed to register');
+        throw new Error("Failed to register");
       }
       if (onItemChange) {
         onItemChange();
       }
     } catch (error) {
-      console.log('Error: ', error);
+      console.log("Error: ", error);
     }
   };
 
@@ -60,7 +61,7 @@ const Item = ({
           <div className={styles.top}>
             <div className={styles.listItem}>Name: {name}</div>
             <div className={styles.listItem}>
-              {inStock ? 'In stock' : 'Out of stock'}
+              {inStock ? "In stock" : "Out of stock"}
             </div>
             <div className={styles.listItem}>Category: {category}</div>
             <div className={styles.listItem}>Quantity: {quantity}</div>

@@ -1,6 +1,6 @@
 // -_-
-import { PrismaClient } from '@prisma/client';
-import { NextResponse } from 'next/server';
+import { PrismaClient } from "@prisma/client";
+import { NextResponse } from "next/server";
 
 // Creating deconstructed primsaclient
 const prisma = new PrismaClient();
@@ -15,10 +15,10 @@ export const GET = async (req, { params }) => {
     });
     return NextResponse.json({ item });
   } catch (error) {
-    console.log('Error: ', error);
+    console.log("Error: ", error);
     return NextResponse.json(
       {
-        message: 'Could not find this ITEM',
+        message: "Could not find this ITEM",
       },
       {
         status: 404,
@@ -42,14 +42,15 @@ export const PUT = async (req, { params }) => {
         quantity,
         description,
         category,
+        inStock: Number(quantity) > 0,
       },
     });
     return NextResponse.json({ updatedItem });
   } catch (error) {
-    console.log('Error: ', error);
+    console.log("Error: ", error);
     return NextResponse.json(
       {
-        message: 'Cant find the item to update',
+        message: "Cant find the item to update",
       },
       {
         status: 404,
@@ -71,10 +72,10 @@ export const DELETE = async (req, { params }) => {
       status: 204,
     });
   } catch (error) {
-    console.log('Error: ', error);
+    console.log("Error: ", error);
     return NextResponse(
       {
-        message: 'Could not find ID',
+        message: "Could not find ID",
       },
       {
         status: 404,

@@ -1,6 +1,6 @@
 // -_-
-import { PrismaClient } from '@prisma/client';
-import { NextResponse } from 'next/server';
+import { PrismaClient } from "@prisma/client";
+import { NextResponse } from "next/server";
 
 // Creating deconstructed primsaclient
 const prisma = new PrismaClient();
@@ -12,7 +12,7 @@ export const GET = async (req) => {
   //   Initializing an array for the items that we are gonna get.
   let items = [];
 
-  const search = searchParams.get('search');
+  const search = searchParams.get("search");
 
   //   TODO  --__-- add radio buttons for category choice and choosen value goes into URL dynamicaly
   //   TODO  --__-- add possibility for mulitpole search choicces
@@ -22,7 +22,7 @@ export const GET = async (req) => {
         where: {
           category: {
             contains: search,
-            mode: 'insensitive',
+            mode: "insensitive",
           },
         },
       });
@@ -31,10 +31,10 @@ export const GET = async (req) => {
       //   IF successfull return 200
       return NextResponse.json(items, { status: 200 });
     } catch (error) {
-      console.log('Error: ', error);
+      console.log("Error: ", error);
       return NextResponse.json(
         {
-          message: 'Invalid Json',
+          message: "Invalid Json",
         },
         {
           status: 404,
@@ -51,16 +51,16 @@ export const GET = async (req) => {
 // Post an ITEM to the ITEM LIST DB
 export const POST = async (req) => {
   let body;
-  console.log('item received: ', body);
+  console.log("item received: ", body);
   try {
     // Getting the specs for the new item to be added
     body = await req.json();
-    console.log('Body: ', body);
+    console.log("Body: ", body);
   } catch (error) {
-    console.log('Error: ', error);
+    console.log("Error: ", error);
     return NextResponse.json(
       {
-        message: 'Invalid Json',
+        message: "Invalid Json",
       },
       {
         status: 400,
@@ -84,13 +84,13 @@ export const POST = async (req) => {
       },
     });
     console.log(Item);
-    const userId = req.headers.get('userId');
+    const userId = req.headers.get("userId");
     return NextResponse.json({ Item });
   } catch (error) {
-    console.log('Error: ', error);
+    console.log("Error: ", error);
     return NextResponse.json(
       {
-        message: 'Invalid Json',
+        message: "Invalid Json",
       },
       {
         status: 404,
