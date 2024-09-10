@@ -1,0 +1,10 @@
+.descBox {
+  display: flex;
+  /* width: 100%; */
+  /* margin-inline: 3rem; */
+  gap: 2rem;
+  padding: 1rem 2rem;
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 0.5rem;
+}

@@ -51,7 +51,7 @@ export const GET = async (req) => {
 // Post an ITEM to the ITEM LIST DB
 export const POST = async (req) => {
   let body;
-
+  console.log('item received: ', body);
   try {
     // Getting the specs for the new item to be added
     body = await req.json();
@@ -78,12 +78,13 @@ export const POST = async (req) => {
       data: {
         name: body.name,
         quantity: Number(body.quantity),
-        inStock: body.inStock,
+        inStock: Number(body.quantity) > 0,
         category: body.category,
         description: body.description,
       },
     });
     console.log(Item);
+    const userId = req.headers.get('userId');
     return NextResponse.json({ Item });
   } catch (error) {
     console.log('Error: ', error);

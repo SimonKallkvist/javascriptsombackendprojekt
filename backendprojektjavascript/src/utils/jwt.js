@@ -1,11 +1,11 @@
-import * as jose from "jose";
+import * as jose from 'jose';
 
 export async function signJWT(payload, secret, options = {}) {
   secret = secret || process.env.JWT_SECRET;
   const token = await new jose.SignJWT(payload)
-    .setProtectedHeader({ alg: "HS256" })
+    .setProtectedHeader({ alg: 'HS256' })
     .setIssuedAt()
-    .setExpirationTime("7d")
+    .setExpirationTime('1d')
     .sign(new TextEncoder().encode(secret));
 
   return token;

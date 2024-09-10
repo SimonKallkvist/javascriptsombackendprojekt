@@ -61,6 +61,7 @@ export const PUT = async (req, { params }) => {
 // Deleting a specific ID
 export const DELETE = async (req, { params }) => {
   const { id } = params;
+  console.log(id);
 
   try {
     await prisma.item.delete({

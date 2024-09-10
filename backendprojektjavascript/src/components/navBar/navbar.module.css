@@ -1,0 +1,44 @@
+.navContainer {
+  width: 100%;
+  /* height: 3rem; */
+  color: rgb(20, 20, 20);
+}
+
+.container {
+  max-width: 1440px;
+  margin-inline: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: rgba(209, 122, 192, 0.466);
+  border-radius: 0 0 1rem 1rem;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(7.4px);
+  -webkit-backdrop-filter: blur(7.4px);
+  border-bottom: 1px solid rgba(212, 75, 185, 0.8);
+}
+
+/* Button */
+
+.btn {
+  padding: 0.5rem 1rem;
+  margin-block: 0.1rem;
+  border-radius: 0.3rem;
+}
+
+.primary {
+  background: hwb(240 38% 0% / 0.5);
+  border: 1px solid hsla(0, 0%, 0%, 0.315);
+  transition: all 0.2s ease-in-out;
+}
+.primary:hover {
+  background: hwb(240 38% 0% / 0.8);
+}
+
+.seconday {
+  background: transparent;
+  color: white;
+  transition: all 0.2s ease-in-out;
+  text-decoration: underline;
+}
