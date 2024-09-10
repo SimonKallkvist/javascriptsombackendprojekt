@@ -61,3 +61,7 @@
 .editBtn:hover {
   background: hsl(199, 65%, 38%);
 }
+
+.errorBorder {
+  border: 2px solid red;
+}

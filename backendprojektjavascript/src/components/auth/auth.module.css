@@ -69,3 +69,6 @@
 .inputField:focus {
   border: 1px solid hwb(194 4% 1% / 0.5);
 }
+.errorMessage {
+  color: red;
+}

@@ -19,7 +19,7 @@ const ItemForm = ({ onItemChange }) => {
       category: formData.get("category"),
     };
     setNewItem(item);
-    console.log(item);
+    // console.log(item);
 
     // CALL FETCH FOR api/items
     try {
@@ -49,6 +49,7 @@ const ItemForm = ({ onItemChange }) => {
       <div className={style.formContainer}>
         <div className={style.smallInput}>
           <input
+            required
             className={style.inputField}
             type="text"
             name="itemName"
@@ -56,6 +57,7 @@ const ItemForm = ({ onItemChange }) => {
             placeholder="name of item"
           />
           <input
+            required
             className={style.inputField}
             type="number"
             name="quantity"
@@ -63,6 +65,7 @@ const ItemForm = ({ onItemChange }) => {
             placeholder="Quantity"
           />
           <input
+            required
             className={style.inputField}
             type="text"
             name="category"
@@ -74,6 +77,7 @@ const ItemForm = ({ onItemChange }) => {
           </button>
         </div>
         <textarea
+          required
           className={style.inputField}
           type="tex"
           name="description"
