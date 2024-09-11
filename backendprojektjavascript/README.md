@@ -36,3 +36,27 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
 ## Instruktioner för Applikation Javascript som Backend språk.
+
+## - Koncept -
+
+En applikation för att spara "Items" för ett lager eller liknande, endast inloggade "medarbetare" kan se över lagerstatus samt lägga till eller ändra. Applikationen
+bygger på Next JS och använder sig av Prisma, Docker och en SQL databas via PgAdmin för att hantera Backend. Utöver det är det skrivet i JSX eller vanlig Javascript. Bcrypt används för att kryptera lösenord så dessa inte ska hackas lika lätt. Jose tillägg används för att sköta JWT token hantering, detta innefattar både skapandet och verifieringen av JWT.
+
+## - Struktur -
+
+Applikationen använder sig av en normal mapp struktur och App router. Innanför "app" mappen så ligger alla paths samt CRUD-operationer som används vid ändring eller tillägg av data. De paths som är skyddade, dvs måste ha autentisering ligger innanför en "auth" mapp för att kunna begränsa åtkomst för en användare. Utöver det ligger de komponenter som bygger upp frontend innanför en "components" mapp i vanlig React. Applikationen använder sig av en middleware fil som skyddar vissa api anrop för att säkerställa säkerheten i applikationen.
+
+För att kunna se till att listan uppdaterar dynamiskt när en ändring skett, tillägg eller edit, så har en custom hook skapatas för att kunna hämta om Items när en förändring sker.
+
+## - How to -
+
+En användare kan skapas för att komma åt de "items" eller funktioner som applikationen ger. Har man redan en användare kan den användas. När en användare tillåts komma in har den valet att lägga in ett nytt item eller ändra befintliga items. Den kan aäven sortera på olika sätt, såsom kategori eller på om Item finns just nu, dvs har en kvantitet som är över 0. Efter användaren är klar kan den logga ut. Även om användaren uppdatearr sidan är den fortfarande inloggad genom ett JWT tokens används för autentisering och dessa sparas via local storage.
+
+## - Dev Dependecies -
+
+- React
+- React-dom
+- Next Js
+- Prisma
+- Bcrypt
+- Jose
